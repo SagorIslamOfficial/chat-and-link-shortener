@@ -15,6 +15,13 @@ use Illuminate\Support\Facades\Route;
 */
 Auth::routes();
 
-Route::get('/', function () {return view('welcome');});
+Route::get('/', function () {
+    return view('welcome');
+});
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('dashboard');
+
+Route::get('/url-shortener', [App\Http\Controllers\LinkShortener\LinkShortenerController::class, 'index'])->name('index');
+Route::post('/url-shortener', [App\Http\Controllers\LinkShortener\LinkShortenerController::class, 'originalLink'])->name('original-link');
+Route::get('/{link}', [App\Http\Controllers\LinkShortener\LinkShortenerController::class, 'getLink'])->name('get-link');
+Route::delete('/{delete}', [App\Http\Controllers\LinkShortener\LinkShortenerController::class, 'destroy'])->name('destroy');
